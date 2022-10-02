@@ -7,3 +7,4 @@ aws-sdk-cpp
 s2n
 vcpkg
 s3_upload_example.cpp
+node-src

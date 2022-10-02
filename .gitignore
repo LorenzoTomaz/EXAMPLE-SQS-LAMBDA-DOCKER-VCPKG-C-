@@ -8,3 +8,4 @@ s2n
 vcpkg
 response.json
 s3_upload_example.cpp
+node-src
