@@ -1,0 +1,10 @@
+aws-c-cal
+aws-c-common
+aws-c-io
+aws-lambda-cpp
+aws-lc
+aws-sdk-cpp
+s2n
+vcpkg
+response.json
+s3_upload_example.cpp

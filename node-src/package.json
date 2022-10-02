@@ -1,0 +1,6 @@
+{
+  "name": "localstack-tutorial",
+  "dependencies": {
+    "dayjs": "^1.11.0"
+  }
+}
