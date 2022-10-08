@@ -29,9 +29,20 @@ echo "Make S3 bucket"
 aws \
   s3 mb s3://lambda-functions \
   --endpoint-url http://localhost:4566 
+
+echo "Make NODE S3 bucket"
+aws \
+  s3 mb s3://node-lambda-functions \
+  --endpoint-url http://localhost:4566 
+
 echo "Copy the lambda function to the S3 bucket"
 aws \
   s3 cp lambdas.zip s3://lambda-functions \
+  --endpoint-url http://localhost:4566 
+
+echo "Copy the node lambda function to the S3 bucket"
+aws \
+  s3 cp node_lambdas.zip s3://node-lambda-functions \
   --endpoint-url http://localhost:4566 
 
 echo "Create the lambda exampleLambdaCPP"
@@ -46,6 +57,20 @@ aws \
   --description "SQS Lambda handler for test sqs." \
   --timeout 60 \
   --memory-size 128 
+
+echo "Create the lambda exampleLambdaNode"
+aws \
+  lambda create-function \
+  --endpoint-url=http://localhost:4566 \
+  --function-name exampleLambdaNode \
+  --role arn:aws:iam::000000000000:role/admin-role \
+  --code S3Bucket=node-lambda-functions,S3Key=node_lambdas.zip \
+  --handler index.handler \
+  --runtime nodejs10.x \
+  --description "SQS node Lambda handler for test sqs." \
+  --timeout 60 \
+  --memory-size 128 
+
 echo "Map the testQueue to the lambda function"
 aws \
   lambda create-event-source-mapping \
@@ -54,4 +79,7 @@ aws \
   --event-source-arn "arn:aws:sqs:us-east-1:000000000000:testQueue" \
   --endpoint-url=http://localhost:4566 \
   --maximum-retry-attempts 2
+
+
+
 echo "All resources initialized! 🚀"

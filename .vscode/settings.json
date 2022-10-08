@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "memory": "cpp",
+    "ios": "cpp",
+    "streambuf": "cpp",
+    "functional": "cpp"
+  }
+}
