@@ -18,7 +18,7 @@
 #include <cstdlib>
 #include <string>
 
-#include "cNode.hpp"
+#include <cNode.hpp>
 
 /* estrutura genoma */
 typedef struct _gene{

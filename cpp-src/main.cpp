@@ -32,7 +32,7 @@
 #include <aws/lambda/model/UpdateEventSourceMappingRequest.h>
 #include <aws/lambda/model/DeleteEventSourceMappingRequest.h>
 #include <aws/lambda/model/ResourceNotFoundException.h>
-#include "cBoard.hpp"
+#include <cBoard.hpp>
 using namespace aws::lambda_runtime;
 int runSimulator( void )
 {

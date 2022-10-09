@@ -21,9 +21,9 @@
 #include <cstdlib>
 #include <random>
 
-#include "cNode.hpp"
-#include "cLife.hpp"
-#include "cNucleo.hpp"
+#include <cNode.hpp>
+#include <cLife.hpp>
+#include <cNucleo.hpp>
 
 using namespace std;
 

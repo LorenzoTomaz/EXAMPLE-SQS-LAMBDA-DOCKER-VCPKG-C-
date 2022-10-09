@@ -12,8 +12,8 @@
 #include <chrono>
 #include <random>
 
-#include "cNode.hpp"
-#include "cLife.hpp"
+#include <cNode.hpp>
+#include <cLife.hpp>
 
 using namespace std;
 
