@@ -32,7 +32,47 @@
 #include <aws/lambda/model/UpdateEventSourceMappingRequest.h>
 #include <aws/lambda/model/DeleteEventSourceMappingRequest.h>
 #include <aws/lambda/model/ResourceNotFoundException.h>
+#include "cBoard.hpp"
 using namespace aws::lambda_runtime;
+int runSimulator( void )
+{
+
+	cBoard objBoard(30,10,1,100);
+
+	/* configura genoma de bactérias do tipo 1 */
+	objBoard.setGeneTipo1("RND_INT","MOVE_AXIS",0.00);
+	objBoard.setGeneTipo1("CHEMICAL_AGENT_INPUT","CHEMICAL_AGENT_REACTION",0.60);
+	objBoard.setGeneTipo1("FOOD_INPUT","FOOD_OUTPUT",3.00);
+	/* configura genoma de bactérias do tipo 2 */
+	objBoard.setGeneTipo2("RND_INT","MOVE_AXIS",0.00);
+	objBoard.setGeneTipo2("CHEMICAL_AGENT_INPUT","CHEMICAL_AGENT_REACTION",0.60);
+	objBoard.setGeneTipo2("FOOD_INPUT","FOOD_OUTPUT",3.00);
+	/* inicia o jogo */
+	int iresult = objBoard.start();
+    int response = -1;
+	switch(iresult)
+	{
+		case 0:
+			std::cout << " Empate." << std::endl;
+            response = 0;
+			break;
+		case 1:
+			std::cout << " Tipo 1 Vence." << std::endl;
+            response = 1;
+			break;
+		case 2:
+			std::cout << " Tipo 2 Vence." << std::endl;
+            response = 2;
+			break;
+		default:
+			std::cout << " Ocorreu algo estranho!!!" << std::endl;
+            response = 3;
+			break;
+	};
+
+
+	return response;
+}
 //using namespace Aws::Lambda;
 //using namespace Aws::Lambda::Model;
 std::string encode(Aws::String const& filename, Aws::String& output);
@@ -58,7 +98,9 @@ invocation_response my_handler(invocation_request const& request)
     
     Aws::Utils::Json::JsonValue json_response = Aws::Utils::Json::JsonValue();
     Aws::Utils::Json::JsonValue msg_response = Aws::Utils::Json::JsonValue();
+    int result = runSimulator();
     msg_response.WithString("message", "success!");
+    msg_response.WithInteger("result", result);
     json_response.WithObject("body", msg_response);
 
     return invocation_response::success(json_response.View().WriteCompact(), "application/json");
