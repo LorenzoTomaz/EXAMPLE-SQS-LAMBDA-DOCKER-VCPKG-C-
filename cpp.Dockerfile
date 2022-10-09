@@ -1,5 +1,5 @@
 FROM ubuntu:latest as cpp_lambda
-
+ENV DEBIAN_FRONTEND=noninteractive
 ARG PORT=8000
 ENV PORT=$PORT
 WORKDIR /usr/src
